@@ -1,0 +1,268 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Food Truck Simulator</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+  height: 48px;
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+	height: 48px;
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, #24282f, rgba(100,100,100,0.73))">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button> Food Truck Simulator</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />							<TR>
+								<TD>Playtime</TD>
+								<TD>1h 35m 0s</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_lastactivity_descending_name_ascending.html#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_added_descending_name_ascending.html#quicklink-26/05/2024">26/05/2024</a> 19:17:26</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_modified_descending_name_ascending.html#quicklink-26/05/2024">26/05/2024</a> 20:06:14</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="default%20list%20text_completionstatus_ascending_name_ascending.html#quicklink-Played">Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_library_ascending_name_ascending.html#quicklink-Steam">Steam</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default%20list%20text_source_ascending_name_ascending.html#quicklink-Steam">Steam</a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_platform_ascending_name_ascending.html#quicklink-PC (Windows)">PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-14/09/2022">14/09/2022</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_communityscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_userscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Drago Entertainment">Drago Entertainment</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Drago Entertainment">Drago Entertainment</a><br/><a href="default%20list%20text%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-HeartBeat Games">HeartBeat Games</a><br/><a href="default%20list%20text%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Movie Games S.A.">Movie Games S.A.</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Achievements">Achievements</a><br/><a href="default%20list%20text%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Cloud saves">Cloud saves</a><br/><a href="default%20list%20text%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Family Sharing">Family Sharing</a><br/><a href="default%20list%20text%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Nexus Mods">Nexus Mods</a><br/><a href="default%20list%20text%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Partial Controller Support">Partial Controller Support</a><br/><a href="default%20list%20text%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://nexusmods.com/foodtrucksimulator" target="_blank">Nexus Mods</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_tag_ascending_name_ascending.html#quicklink-Automobile Sim">Automobile Sim</a><br/><a href="default%20list%20text%20combobox%20quicklinks_tag_ascending_name_ascending.html#quicklink-Casual">Casual</a><br/><a href="default%20list%20text%20combobox%20quicklinks_tag_ascending_name_ascending.html#quicklink-Choices Matter">Choices Matter</a><br/><a href="default%20list%20text%20combobox%20quicklinks_tag_ascending_name_ascending.html#quicklink-Cooking">Cooking</a><br/><a href="default%20list%20text%20combobox%20quicklinks_tag_ascending_name_ascending.html#quicklink-Crafting">Crafting</a><br/><a href="default%20list%20text%20combobox%20quicklinks_tag_ascending_name_ascending.html#quicklink-Economy">Economy</a><br/><a href="default%20list%20text%20combobox%20quicklinks_tag_ascending_name_ascending.html#quicklink-Family Friendly">Family Friendly</a><br/><a href="default%20list%20text%20combobox%20quicklinks_tag_ascending_name_ascending.html#quicklink-First-Person">First-Person</a><br/><a href="default%20list%20text%20combobox%20quicklinks_tag_ascending_name_ascending.html#quicklink-Funny">Funny</a><br/><a href="default%20list%20text%20combobox%20quicklinks_tag_ascending_name_ascending.html#quicklink-Indie">Indie</a><br/><a href="default%20list%20text%20combobox%20quicklinks_tag_ascending_name_ascending.html#quicklink-Management">Management</a><br/><a href="default%20list%20text%20combobox%20quicklinks_tag_ascending_name_ascending.html#quicklink-Memes">Memes</a><br/><a href="default%20list%20text%20combobox%20quicklinks_tag_ascending_name_ascending.html#quicklink-Physics">Physics</a><br/><a href="default%20list%20text%20combobox%20quicklinks_tag_ascending_name_ascending.html#quicklink-Racing">Racing</a><br/><a href="default%20list%20text%20combobox%20quicklinks_tag_ascending_name_ascending.html#quicklink-Realistic">Realistic</a><br/><a href="default%20list%20text%20combobox%20quicklinks_tag_ascending_name_ascending.html#quicklink-Relaxing">Relaxing</a><br/><a href="default%20list%20text%20combobox%20quicklinks_tag_ascending_name_ascending.html#quicklink-Replay Value">Replay Value</a><br/><a href="default%20list%20text%20combobox%20quicklinks_tag_ascending_name_ascending.html#quicklink-Sandbox">Sandbox</a><br/><a href="default%20list%20text%20combobox%20quicklinks_tag_ascending_name_ascending.html#quicklink-Simulation">Simulation</a><br/><a href="default%20list%20text%20combobox%20quicklinks_tag_ascending_name_ascending.html#quicklink-Singleplayer">Singleplayer</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<a href="https://store.steampowered.com/app/2600880/Gas_Station_Simulator__Tidal_Wave_DLC/" target="_blank" rel=""  id="dynamiclink_3" >https://store.steampowered.com/app/2600880/Gas_Station_Simulator__Tidal_Wave_DLC/</a><br><a href="https://store.steampowered.com/app/2137370/Gas_Station_Simulator__Airstrip_DLC/" target="_blank" rel=""  id="dynamiclink_4" >https://store.steampowered.com/app/2137370/Gas_Station_Simulator__Airstrip_DLC/</a><br><br>Your father owned a food truck. Though the vehicle has grown old, it has become a cornerstone of your family's legacy. Now, in the blink of an eye, your father's gone. Now, the food truck belongs to you. Will you walk in your father's footsteps and live up to his name? Only one way to find out.<br><br><img src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1160920/extras/Driving.gif?t=1711038901" /><br>You can't take the 'truck' out of 'food truck'. Before you can set your stalls up, you have to actually get from your garage to wherever you decide to vend for the day. Be mindful of traffic, and congestions too! When you feel you're short on time do as your father did and veer off the beaten path. First come, first served!<br><br><img src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1160920/extras/Cooking.gif?t=1711038901" /><br>You might've thought that all there is to this business is fast food, but now that you're on the other side of the counter it's time to think again. Even so much as a slice of cheese can turn a classic burger into a cheeseburger special. So, what will it be, sir? Ketchup or mustard?<br><br><img src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1160920/extras/Serving.gif?t=1711038901" /><br>Customers can be impatient and needy a lot. You'll find that you don't have all that much time to get them what they want and fit their palate as well. It'll be a challenge, but it's one your father has overcome, and surely so can you. Practice makes perfect, so go and knock them off their feet with your quality food!<br><br><img src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1160920/extras/Upgrading.gif?t=1711038901" /><br>As your prestige grows, so does your repertoire of tricks and tools. Stay up to date with your fame as you follow your in father's footsteps. Make sure to outfit yourself with the newest, top-of-the-line equipment you (and your wallet) can muster. Ride the wave of fame.<br><br><img src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1160920/extras/Customizing.gif?t=1711038901" /><br>The truck belongs to you and as the hands that own it change, so too should its décor. Adjust anything from the exterior's color to the interior layout, the bumpers, lights, and wheels. Show the city you're no less than your father was and hit the streets like you own them.<br><br><img src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1160920/extras/Ordering.gif?t=1711038901" /><br>Each day is a new adventure, and each adventure requires sufficient provisions. Ingredients aren't permanent and will rot and spoil as the hours tick on by. Remember to stock up on not only the freshest but most desirable produce your clientele might demand of you.<br><br><img src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1160920/extras/Cleaning.gif?t=1711038901" /><br>The truck is dirty and has fallen to disrepair. Honour dad's memory by polishing it one last time. It's been a while since the truck has seen any use. Grab a bucket and a sponge, find a broom and get to cleaning. You'll need to be thorough, and it might take a while to make the truck spick and span, but now you have a duty to fulfill. Get to it!<h2 class="bb_tag">Key Features</h2><ul class="bb_ul"><li> Renovating and expanding food truck.<br></li><li> Wide range of customization options.<br></li><li> Large catalogue of equipment options to choose from.<br></li><li> Create your own recipes.<br></li><li> Driving with traffic system.<br></li><li> Detailed cooking system.<br></li><li> Different locations across an entire city with different types of customers.<br></li><li> Various events.<br></li><li> Managing <br></li><li> Living city with dynamic day and night cycle.</li></ul><br><a href="https://steamcommunity.com/linkfilter/?u=https%3A%2F%2Fdiscord.com%2Finvite%2FmcXjfHrtgT%3Ffbclid%3DIwAR1B60H-F0J0iX2XV9raEOjR7b1PLUEPf9nNLOnlGISNO1KeUhAtXxNyx0A" target="_blank" rel=" noopener"  ><br><img src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1160920/extras/FTS_Discord.jpg?t=1711038901" /></a>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
