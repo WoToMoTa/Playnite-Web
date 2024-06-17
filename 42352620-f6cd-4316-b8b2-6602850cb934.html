@@ -1,0 +1,268 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Airport CEO</title>
+		<meta name="viewport" content="width=device-width, initial-scale=0.55">
+		<style>
+body {
+  background: #24282f;                                /* main background color in case of no image */
+  font-family: 'Arial';                               /* font arial which should be readable */
+  Height:100%;                                        /* set width to 100% also needed for background */
+  margin:0px;                                         /* hide any margins */
+  background-size: cover;                             /* size background image without distortion along width and height */
+  background-repeat: no-repeat;                       /* no background repeat */
+  Background-attachment:fixed;                        /* needed to make background image behave properly */
+  overflow-y:hidden;                                  /* no normal overflow, only our containers (details & description) will overflow or have scrollbar * /
+}
+ 
+html {
+  height:100%;                                        /* need to set this to 100% to make the background behave propertly */
+}
+
+.title h2 {
+  padding-left: 25px;                                 /* left padding */
+  color: #ccc;                                        /* text color */
+  margin: 0;                                          /* no margins */
+  background-color: black;                            /* black background */
+  vertical-align: middle;                             /* align vertical middle */
+  height: 48px;
+}
+
+.title {
+	width: 100%;                                      /* title container width 100% */
+	grid-column: 1 / span 3;                          /* column 1 but spans 3 */
+    grid-row: 1;                                      /* row 1 */
+	height: 48px;
+}
+.cards {                                              /* empty not used here */
+}
+
+.card {
+	display: grid;                                    /* container which is the grid */
+	grid-template-columns: min-content;               /* size columns to minimum content */
+	grid-template-rows: min-content min-content;      /* size rows to minimum content */
+	height: 100vh;                                    /* 100% viewport height */
+}
+
+.detailstitle{
+  grid-column: 1;                                     /* 1st column */
+  grid-row: 2;                                        /* 2nd row */
+  width: 350px;                                       /* fixed width set to same size as details */
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+}
+
+.details {
+  padding-left: 10px;                                 /* some padding left */
+  padding-right: 10px;                                /* some padding right */
+  color: #ccc;
+  grid-column: 1;                                      /* 1st column */
+  grid-row: 3;                                         /* 3rd row of grid */
+  width: 350px;                                        /* fixed width of details */
+  overflow-y: auto;                                     /* add vertical scrollbar if needed */
+  overflow-x:hidden;                                   /* don't overflow on x axis (no horz scrollbar) */
+ }
+ 
+.detailstitle h3,
+.descriptiontitle h3 {
+	border-bottom: 1px solid #ccc;                     /* titles of description details should have line under it */
+	padding: 5px;                                      /* add some padding */
+	color: #ccc;                                       /* text color of the titles */
+}
+
+.detailstable th, td {
+  border: 0px;                                         /* no borders on td, th elements */
+  color: #ccc;                                         /* details table text color */
+}
+
+.detailstable td {
+  text-align: left;                                    /* align text left */
+  vertical-align: top;                                 /* align top */
+}
+
+.detailstable {
+  width: 100%;                                         /* set to full width of details */
+  padding: 5px;                                        /* add some padding */
+}
+
+.descriptiontitle {
+	grid-column: 2;                                    /* column 2 of grid */
+	grid-row: 2;                                       /* row 2 of grid */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+
+.description {
+	color: #ccc;                                       /* text color */
+	grid-column: 2;                                    /* 2nd column of grid */
+	grid-row: 3;                                       /* 3rd row of grid */
+	overflow-y: auto;                                  /* overflow-y automatic (for adding scrollbar) */
+	overflow-x:hidden;                                 /* prevent horizontal scrollbar */
+	padding-left: 10px;                                /* some padding left */
+	padding-right: 10px;                               /* some padding right */
+}
+
+.description img {
+	max-width: 100%;                                   /* make sure images don't overflow in width to prevent scrollbars */
+}
+
+.MenuButton {
+  border: none;                                        /* Remove borders */
+  outline: none;                                       /* Remove outline */
+  background-color: #888;                              /* Set a background color */
+  color: #000;                                         /* Text color */
+  padding: 5px;                                        /* Some padding */
+  border-radius: 4px;                                  /* Rounded corners, border */
+  font-size: 20px;                                     /* Increase font size */
+  cursor:pointer;                                         /* Add a mouse pointer on hover */
+  margin-right: 20px;                                  /* to have some space on right side before next element */
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+}
+
+.MenuButton:hover {
+  background-color: #777;                              /* Add a dark-grey background on hover */
+  color: #CCC;                                         /* Text color */
+}
+
+a {
+ text-decoration: none;                                /* no text underline in links */
+}
+a:link {
+  color: #CCC;                                         /* unvisited link color */
+}
+a:visited {
+  color: #CCC;                                         /* visited link color */
+}
+a:hover {
+  color: #EEE;                                         /* mouse over link color */
+  text-decoration: underline;                          /* add text underline in links when mouse over */
+}
+a:active {
+  color: #CCC;                                         /* selected link color */
+}
+
+                                                       /* scrollbars W3C standard that is currently Firefox-only */
+* {
+  scrollbar-width: thin;                               /* small width */
+  scrollbar-color: #888 transparent;                   /* trackbar color + transparant background */
+}
+
+                                                       /* scrollbars on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 12px;                                         /* small width */
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;                             /* background color track */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #AAA;                              /* background */
+  border-radius: 20px;                                 /* rounded corner, border */
+  border: 3px solid #888;                              /* add the border */
+}
+
+		</style>
+	</head>
+	<body style="background-image: linear-gradient(to bottom, #24282f, rgba(100,100,100,0.73))">
+		<div class="cards">
+			<div class="card">
+				<div class="title">
+					<h2><button onclick="window.history.back()" class="MenuButton">Back</button> Airport CEO</h2>
+				</div>
+				<div class="detailstitle">
+				<H3>Details</H3>
+				</div>
+				<div class="details">
+					<div style="overflow: auto;">
+						<TABLE class="detailstable">
+							<col style="width:50%" />
+							<col style="width:50%" />							<TR>
+								<TD>Playtime</TD>
+								<TD>Not Played</TD>
+							</TR>
+							<TR>
+								<TD>Last Activity</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_lastactivity_descending_name_ascending.html#quicklink-Never">Never</a> </TD>
+							</TR>
+							<TR>
+								<TD>Added</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_added_descending_name_ascending.html#quicklink-16/06/2024">16/06/2024</a> 21:58:48</TD>
+							</TR>
+							<TR>
+								<TD>Modified</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_modified_descending_name_ascending.html#quicklink-16/06/2024">16/06/2024</a> 22:28:07</TD>
+							</TR>
+							<TR>
+								<TD>Completion Status</TD>
+								<TD><a href="default%20list%20text_completionstatus_ascending_name_ascending.html#quicklink-Not Played">Not Played</a></TD>
+							</TR>
+							<TR>
+								<TD>Library</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_library_ascending_name_ascending.html#quicklink-Steam">Steam</a></TD>
+							</TR>
+							<TR>
+								<TD>Source</TD>
+								<TD><a href="default%20list%20text_source_ascending_name_ascending.html#quicklink-Steam">Steam</a></TD>
+							</TR>
+							<TR>
+								<TD>Platform</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_platform_ascending_name_ascending.html#quicklink-PC (Windows)">PC (Windows)</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Release Date</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_releasedate_descending_name_ascending.html#quicklink-28/09/2017">28/09/2017</a> </TD>
+							</TR>
+							<TR>
+								<TD>Community Score</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_communityscore_descending_name_ascending.html#quicklink-68">68</a></TD>
+							</TR>
+							<TR>
+								<TD>Critic Score</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_criticscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>User Score</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_userscore_descending_name_ascending.html#quicklink-"></a></TD>
+							</TR>
+							<TR>
+								<TD>Genre</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Indie">Indie</a><br/><a href="default%20list%20text%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Simulator">Simulator</a><br/><a href="default%20list%20text%20combobox%20quicklinks_genre_ascending_name_ascending.html#quicklink-Strategy">Strategy</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Developer</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_developer_ascending_name_ascending.html#quicklink-Apoapsis Studios">Apoapsis Studios</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Publisher</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_publisher_ascending_name_ascending.html#quicklink-Apoapsis Studios">Apoapsis Studios</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Feature</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_feature_ascending_name_ascending.html#quicklink-Single Player">Single Player</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Links</TD>
+								<TD><a href="https://www.youtube.com/channel/UCQHynobH8oxCCt6dcwH4UTw" target="_blank">YouTube</a><br/><a href="https://www.airportceo.com/" target="_blank">Official</a><br/><a href="https://www.facebook.com/airportceo" target="_blank">Facebook</a><br/><a href="https://twitter.com/AirportCEO" target="_blank">Twitter</a><br/><a href="https://store.steampowered.com/app/673610" target="_blank">Steam</a><br/><a href="https://www.gog.com/game/airport_ceo" target="_blank">GOG</a><br/><a href="https://www.twitch.tv/directory/game/Airport%20CEO" target="_blank">Twitch</a><br/><a href="https://store.epicgames.com/en-US/p/airport-ceo-442ecc" target="_blank">Epic</a><br/><a href="https://www.instagram.com/apoglabs/" target="_blank">Instagram</a><br/><a href="https://discord.me/AirportCEO" target="_blank">Discord</a><br/><a href="https://www.reddit.com/r/airportceo/" target="_blank">Reddit</a><br/><a href="https://airportceo.wiki.gg/" target="_blank">Wikia</a><br/></TD>
+							</TR>
+							<TR>
+								<TD>Tag</TD>
+								<TD><a href="default%20list%20text%20combobox%20quicklinks_tag_ascending_name_ascending.html#quicklink-2D">2D</a><br/><a href="default%20list%20text%20combobox%20quicklinks_tag_ascending_name_ascending.html#quicklink-Automation">Automation</a><br/><a href="default%20list%20text%20combobox%20quicklinks_tag_ascending_name_ascending.html#quicklink-Base Building">Base Building</a><br/><a href="default%20list%20text%20combobox%20quicklinks_tag_ascending_name_ascending.html#quicklink-Building">Building</a><br/><a href="default%20list%20text%20combobox%20quicklinks_tag_ascending_name_ascending.html#quicklink-Capitalism">Capitalism</a><br/><a href="default%20list%20text%20combobox%20quicklinks_tag_ascending_name_ascending.html#quicklink-City Builder">City Builder</a><br/><a href="default%20list%20text%20combobox%20quicklinks_tag_ascending_name_ascending.html#quicklink-Economy">Economy</a><br/><a href="default%20list%20text%20combobox%20quicklinks_tag_ascending_name_ascending.html#quicklink-Flight">Flight</a><br/><a href="default%20list%20text%20combobox%20quicklinks_tag_ascending_name_ascending.html#quicklink-Immersive Sim">Immersive Sim</a><br/><a href="default%20list%20text%20combobox%20quicklinks_tag_ascending_name_ascending.html#quicklink-Logic">Logic</a><br/><a href="default%20list%20text%20combobox%20quicklinks_tag_ascending_name_ascending.html#quicklink-Management">Management</a><br/><a href="default%20list%20text%20combobox%20quicklinks_tag_ascending_name_ascending.html#quicklink-Moddable">Moddable</a><br/><a href="default%20list%20text%20combobox%20quicklinks_tag_ascending_name_ascending.html#quicklink-Realistic">Realistic</a><br/><a href="default%20list%20text%20combobox%20quicklinks_tag_ascending_name_ascending.html#quicklink-Resource Management">Resource Management</a><br/><a href="default%20list%20text%20combobox%20quicklinks_tag_ascending_name_ascending.html#quicklink-Sandbox">Sandbox</a><br/><a href="default%20list%20text%20combobox%20quicklinks_tag_ascending_name_ascending.html#quicklink-Simulation">Simulation</a><br/><a href="default%20list%20text%20combobox%20quicklinks_tag_ascending_name_ascending.html#quicklink-Singleplayer">Singleplayer</a><br/><a href="default%20list%20text%20combobox%20quicklinks_tag_ascending_name_ascending.html#quicklink-Strategy">Strategy</a><br/><a href="default%20list%20text%20combobox%20quicklinks_tag_ascending_name_ascending.html#quicklink-Top-Down">Top-Down</a><br/><a href="default%20list%20text%20combobox%20quicklinks_tag_ascending_name_ascending.html#quicklink-Transportation">Transportation</a><br/></TD>
+							</TR>
+						</TABLE>
+					</div>
+				</div>
+				<div class="descriptiontitle">
+					<H3>Description</H3>
+				</div>
+				<div class="description">
+					<strong>Airport CEO</strong> is a tycoon and management game where you take the seat as a CEO of your own airport. You will build the airport’s infrastructure with everything from runways and taxiways, gates and aprons to constructing terminals with check-in, security, restaurants and shops. You will manage the business perspective of the airport by hiring employees and executives, making deals with airline companies and making sure that ends meet by keeping an eye on budget and resources. <br><br>You will have to cater to the passengers by keeping waiting time to a minimum, by having friendly and helpful staff around and by making passengers feel secure, keeping any potential incidents at bay; a happy passenger is a spending passenger. Hopefully you won’t run into any problems such as stressed out employee, equipment breakdowns or bad weather which can cause massive delays or even emergency landings. You will be held accountable when things go wrong and filthy rich when things go right.<br><br><img src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/673610/extras/the_gameplay.png?t=1696770408" /><h2 class="bb_tag">Running an airport</h2>Your objective is to build and manage your airport to perfection by making strategic decisions, designing the optimal airport layout and ultimately making sure that your passengers and airlines are satisfied. You will need to build the entire airport from scratch including terminal foundations with floors, walls, doors and items as well as the airport infrastructure including runways, taxiways, aprons and other airport infrastructure. Everything in Airport CEO is deeply simulated and it is your job to make sure it all runs smoothly and with a positive bank account.<h2 class="bb_tag">Airlines</h2>Airlines and their travelers are an essential element of Airport CEO as they consist of the main source of your airport’s income. Signing contracts with airlines bring cash-flow and passengers to your airport which in term means opportunities for receiving different service fees, as well as passenger expenditures. Airlines come in different sizes and have different requirements on your airport and the services you offer, you are responsible for not only planning the flight schedule but also for meeting and maintaining the needs. Occasionally you will need to handle emergencies and delays due to bad weather or accidents in the area, all which will put your management skills to the test.<br><br><br><img src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/673610/extras/passengers_employees.png?t=1696770408" /><h2 class="bb_tag">Passengers</h2>Passengers in Airport CEO all have their unique personalities, needs, a background story and most importantly; a flight to catch (on time). Passengers are thoroughly simulated and their decisions, behaviors and opinions about your airport are affected by several factors. Passengers in Airport CEO, just as in real life, must wait in lines, check in, pass security and then entertain themselves until their flight is ready for boarding. Arriving passengers must find their way the baggage claim, get a hold of their bags and maybe pass a customs booth before getting on their airport transfer. Whether they’ll be able to actually catch their flight is up to you: Passengers might have a hard time finding their way around the airport so you build an information desk, passengers might get irritated because of the long security queue and waiting time so you extend its capacity, passengers might complain about the lack of fun things to do in the gate area so you build a duty-free shop or exclusive brand boutiques.<h2 class="bb_tag">Employees</h2>Employees are those you rely on to keep your airport running. Just as passengers they are simulated individuals who have a mind of their own. Employees have a number of different roles and it is your job to make sure that your airport has the right and necessary work force at any time. From passenger service agents, janitors, ramp agents and mechanics, security officers to administrators and executives. The more you expand your airport’s capacity and services, the more versatile and skilled your employees have to be. When employees interact with passengers, they’ll have to be skilled at managing people and stress resistant in order to avoid making mistakes or give bad customer service.<br><br><br><img src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/673610/extras/facilities_ceo.png?t=1696770408" /><h2 class="bb_tag">Facilities and buildings</h2>Airports are complex mega-structures with a lot of different buildings and facilities. While a small airport might not need more than a simple grass runway and a terminal, as you grow your airport you will have to expand its facilities ranging from air control towers, larger aircraft stands and taxiways to fire, weather, catering or fuel stations. As your airport grows your terminal grows with it and you will have to make sure that it is equipped with the necessary facilities that passengers are expecting. Building a terminal in Airport CEO is highly customizable where you lay out its shape and interior such floor type, walls, windows and doors. Baggage needs to be processed and transported to the same flight as its owner and its all up to you to avoid bottlenecks and by designing the ultimate airport terminal.<h2 class="bb_tag">Being a CEO</h2>Data, data, data! As the acting CEO of your airport you need to be able to make difficult business decisions based on current operation. In Airport CEO you’re provided with multiple sources of information from which you can draw conclusions and manage your airport. As the CEO you will not only be responsible for the architecture of the airport but also for those working in it. Tired of planning every flight? Establish an informatics department and let an automated system do it for you! Tired of assessing the monthly budget balance? Hire a CFO which can help you cut cost and set prices. Best of luck!
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
